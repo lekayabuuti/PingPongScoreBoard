@@ -8,7 +8,7 @@ abordagens diferentes de retenção de estado (Etapas 1 a 4).
 | Abordagem                     | Rotação de tela | Morte do processo |
 |--------------------------------|:---------------:|:-----------------:|
 | remember                       |  Não sobrevive  |   Não sobrevive   |
-| ViewModel + mutableStateOf     |                 |                   |
+| ViewModel + mutableStateOf     |    Sobrevive    |   Não sobrevive   |
 | ViewModel + StateFlow          |                 |                   |
 | ViewModel + SavedStateHandle   |                 |                   |
 
