@@ -1,28 +1,33 @@
 package br.edu.ifsp.scl.sc3047733.pingpongscoreboard
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
-class ScoreViewModel : ViewModel() {
+class ScoreViewModel(
+    private val savedStateHandle: SavedStateHandle
+) : ViewModel() {
 
-    private val _placarA = MutableStateFlow(0)
-    val placarA: StateFlow<Int> = _placarA.asStateFlow()
+    companion object {
+        private const val CHAVE_PLACAR_A = "placarA"
+        private const val CHAVE_PLACAR_B = "placarB"
+    }
 
-    private val _placarB = MutableStateFlow(0)
-    val placarB: StateFlow<Int> = _placarB.asStateFlow()
+    val placarA: StateFlow<Int> = savedStateHandle.getStateFlow(CHAVE_PLACAR_A, 0)
+    val placarB: StateFlow<Int> = savedStateHandle.getStateFlow(CHAVE_PLACAR_B, 0)
 
     fun incrementarA() {
-        _placarA.value = _placarA.value + 1
+        val atual = savedStateHandle.get<Int>(CHAVE_PLACAR_A) ?: 0
+        savedStateHandle[CHAVE_PLACAR_A] = atual + 1
     }
 
     fun incrementarB() {
-        _placarB.value = _placarB.value + 1
+        val atual = savedStateHandle.get<Int>(CHAVE_PLACAR_B) ?: 0
+        savedStateHandle[CHAVE_PLACAR_B] = atual + 1
     }
 
     fun reiniciar() {
-        _placarA.value = 0
-        _placarB.value = 0
+        savedStateHandle[CHAVE_PLACAR_A] = 0
+        savedStateHandle[CHAVE_PLACAR_B] = 0
     }
 }
