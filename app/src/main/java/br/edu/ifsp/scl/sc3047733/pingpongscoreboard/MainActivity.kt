@@ -10,12 +10,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import br.edu.ifsp.scl.sc3047733.pingpongscoreboard.ui.theme.PingPongScoreBoardTheme
 
@@ -32,24 +30,21 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun PlacarScreen(viewModel: ScoreViewModel) {
+    val placarA by viewModel.placarA.collectAsStateWithLifecycle()
+    val placarB by viewModel.placarB.collectAsStateWithLifecycle()
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text("Jogador A: ${viewModel.placarA}")
-        Button(onClick = {
-            viewModel.incrementarA()
-        }) { Text("+1") }
+        Text("Jogador A: $placarA")
+        Button(onClick = { viewModel.incrementarA() }) { Text("+1") }
 
-        Text("Jogador B: ${viewModel.placarB}")
-        Button(onClick = {
-            viewModel.incrementarB()
-        }) { Text("+1") }
+        Text("Jogador B: $placarB")
+        Button(onClick = { viewModel.incrementarB() }) { Text("+1") }
 
-        Button(onClick = {
-            viewModel.reiniciar()
-        }) { Text("Reiniciar partida") }
+        Button(onClick = { viewModel.reiniciar() }) { Text("Reiniciar partida") }
     }
 }
 
