@@ -6,11 +6,11 @@ abordagens diferentes de retenção de estado (Etapas 1 a 4).
 ## Quadro comparativo
 
 | Abordagem                     | Rotação de tela | Morte do processo |
-|--------------------------------|:----------------:|:--------------------:|
-| remember                       |                  |                      |
-| ViewModel + mutableStateOf     |                  |                      |
-| ViewModel + StateFlow          |                  |                      |
-| ViewModel + SavedStateHandle   |                  |                      |
+|--------------------------------|:---------------:|:-----------------:|
+| remember                       |  Não sobrevive  |   Não sobrevive   |
+| ViewModel + mutableStateOf     |                 |                   |
+| ViewModel + StateFlow          |                 |                   |
+| ViewModel + SavedStateHandle   |                 |                   |
 
 ## Perguntas
 
